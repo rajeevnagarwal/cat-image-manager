@@ -66,6 +66,8 @@ curl --location --request GET 'http://localhost:8081/image-manager/v1/images/1'
   --form 'file=@"/Users/netomi/Downloads/swimlanes-2fc094d3a5388ba7556558bbc663f0b1.png"' \
   --form 'description="Very good image. But not bad"'``
 * Delete an existing image
+* ``curl --location --request DELETE 'http://localhost:8081/image-manager/v1/images/123' \
+  ``
 
 
 
