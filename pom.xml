@@ -67,6 +67,17 @@
 			<version>2.4.4</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>net.bytebuddy</groupId>
+			<artifactId>byte-buddy</artifactId>
+			<version>1.14.2</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+			<version>3.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>

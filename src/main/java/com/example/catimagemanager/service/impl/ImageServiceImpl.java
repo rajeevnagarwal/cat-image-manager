@@ -73,6 +73,12 @@ public class ImageServiceImpl implements ImageService {
         log.info("Request received for updating image with id : {}",id);
         if (!StringUtils.hasLength(id))
             throw new ServiceException("ID cannot be empty", Constant.EXCEPTION_CODE.INVALID_REQUEST);
+        if (ObjectUtils.isEmpty(imageRequest))
+            throw new ServiceException("Empty payload", Constant.EXCEPTION_CODE.INVALID_REQUEST);
+        if (!StringUtils.hasLength(imageRequest.getName()))
+            throw new ServiceException("Name cannot be empty", Constant.EXCEPTION_CODE.INVALID_REQUEST);
+        if (ObjectUtils.isEmpty(imageRequest.getMultipartFile()))
+            throw new ServiceException("File cannot be empty", Constant.EXCEPTION_CODE.INVALID_REQUEST);
         Optional<ImageDTO> imageDTOOptional = imageRepository.findById(Long.valueOf(id));
         if (!imageDTOOptional.isPresent())
             throw new ServiceException(String.format("Image with id : %s not found in our system", id), Constant.EXCEPTION_CODE.RESOURCE_NOT_FOUND);
@@ -98,7 +104,7 @@ public class ImageServiceImpl implements ImageService {
         try {
             imageRepository.deleteById(Long.parseLong(id));
         } catch (EmptyResultDataAccessException e) {
-            throw new ServiceException(String.format("Image with id : %s not found in our system", id),Constant.EXCEPTION_CODE.INVALID_REQUEST);
+            throw new ServiceException(String.format("Image with id : %s not found in our system", id),Constant.EXCEPTION_CODE.RESOURCE_NOT_FOUND);
         } catch (Exception e) {
             log.error("Exception while deleting : {}",e);
             throw new ServiceException(String.format("Error while deleting image with id : %s", id),Constant.EXCEPTION_CODE.INVALID_REQUEST);
